@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Deprecated
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping // POST - create new Product
-    public ResponseEntity handlePost(@RequestBody ProductDto productDto){
+    public ResponseEntity handlePost(@RequestBody @Valid ProductDto productDto){
 
         ProductDto savedDto = productService.saveNewProduct(productDto);
 
@@ -39,7 +40,7 @@ public class ProductController {
     }
 
     @PutMapping({"/{productId}"})
-    public ResponseEntity handleUpdate(@PathVariable("productId") UUID productId, @RequestBody ProductDto productDto){
+    public ResponseEntity handleUpdate(@PathVariable("productId") UUID productId, @RequestBody @Valid ProductDto productDto){
 
         productService.updateProduct(productId, productDto);
 
